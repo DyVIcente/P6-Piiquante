@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-//const helmet = require('helmet');
+const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const sauceRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
@@ -12,7 +12,7 @@ require('dotenv').config();
 
 
 app.use(express.json());
-//app.use(helmet());//Helmet vous aide à protéger votre application de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP.
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));//Helmet vous aide à protéger votre application de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP.
 
 
 
