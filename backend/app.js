@@ -13,7 +13,7 @@ require('dotenv').config();
 
 app.use(express.json());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));//Helmet vous aide à protéger votre application de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP.
-
+// chanegement de policy car par default sameorigin
 
 
 mongoose.connect(process.env.DB_URL,
