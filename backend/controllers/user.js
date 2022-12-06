@@ -30,12 +30,13 @@ exports.signup = (req, res, next) => {
 
 // login, verif si un utilisateur qui se co dispose d'indentifiants valides
 exports.login = (req, res, next) => {
+    // on utilise findOne 
     User.findOne({ email: req.body.email })
         .then(user => {
             if (user === null) {
-                res.status(401).json({ message: 'Paire identifiant/mdp incorrecte' }); // utilisteur non trouvé, msg flou pour ne pas qu'il le sache 
+                res.status(401).json({ message: 'Paire identifiant/mdp incorrecte' }); // utilisteur non trouvé, msg flou pour ne pas qu'il le sache si quelqu'un est deja enregistré
             } else {
-                bcrypt.compare(req.body.password, user.password) // fct compare de bcrypt, elle compare le mdp entré par l'utilisateur avec le hash enregistré dans la bdd
+                bcrypt.compare(req.body.password, user.password) // method compare de bcrypt, elle compare le mdp entré par l'utilisateur avec le hash enregistré dans la bdd
                     .then(valid => {
                         if (!valid) {                              // si ça ne correspond pas error 401 meme msg d'erreur qu'avant
                             res.status(401).json({ message: 'Paire identifiant/mdp incorrecte' });
@@ -43,7 +44,7 @@ exports.login = (req, res, next) => {
                             res.status(200).json({         // si ok, on renvoit une rep 200 avec l'id utilisateur et un token
                                 userId: user._id,
                                 token: jwt.sign(            // fct sign de jwt pour chiffrer un nouveau token
-                                    { userId: user._id },  // création d'un token / le userId est la en payload(données encodées) pour ne pas que d'autres utilisateurs peuvents changer les sauces
+                                    { userId: user._id },  // création d'un token / le userId est la en payload(données encodées) pour ne pas que d'autres utilisateurs peuvent changer les sauces
                                     'RANDOM_TOKEN_SECRET', // chaine qui sert de clé au cryptage 
                                     { expiresIn: '24h' }    // durée valide du token de 24h
                                 )

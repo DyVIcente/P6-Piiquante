@@ -1,8 +1,11 @@
 const express = require('express');
+//on créé un router avec la méthode router d'express 
 const router = express.Router();
 
-
+//on met auth avant nos gestionnaires de routes pour qu'elles soient authentifiées
 const auth = require('../middleware/auth');
+
+
 const multer = require('../middleware/multer-config');
 
 
@@ -22,7 +25,7 @@ router.get('/', auth, saucesCtrl.getAllSauces);
 //crée post la sauce
 router.post('/', auth, multer, saucesCtrl.createSauce); // avec multer le format de la requete change
 
-// Récupérer 1/une sauce
+// Récupérer 1/une sauce  //// l'id en parametre de route /////
 router.get('/:id', auth, saucesCtrl.getOneSauce);
 
 // modif

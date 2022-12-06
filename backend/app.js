@@ -10,12 +10,13 @@ const app = express();
 
 require('dotenv').config();
 
-
+//bodyparser ancienne version , on extrait le corps de la requete en json
 app.use(express.json());
+
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));//Helmet vous aide à protéger votre application de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP.
 // chanegement de policy car par default sameorigin
 
-
+//connection avec MongoDB, API connectée avec la BDD
 mongoose.connect(process.env.DB_URL,
     {
         useNewUrlParser: true,
@@ -36,11 +37,17 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(mongoSanitize());
  // mongo sanitize enleve les demande avec $ et un . poru eviter les attaques pour ne pas avoir acces a la database
+app.use(mongoSanitize());
+//pour cette route , on utilise le router exposé par sauceRoutes
 app.use('/api/sauces', sauceRoutes);
+
 app.use('/api/auth', userRoutes);
+
+
+
 // on rajoute une route, qui va servir des fichiers static, on utilise le middleware static de express, on récupere le repertoire dans lequel sexecute le server et y concatener le rep images 
+//  on rajoute la route pour image 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;

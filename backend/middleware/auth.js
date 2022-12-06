@@ -14,11 +14,11 @@ dotenv.config();
 module.exports= (req, res, next) => {
     
     try {
-        const token = req.headers.authorization.split(' ')[1];//récupérer le token
-        const decodedToken = jwt.verify(token, process.env.CAMILLEBEST4EVER); // appel a la method verify, on lui passe le token et la clé, cela vérifie la validité dun token
-        const userId = decodedToken.userId; //recuperation de l'userId et le decoder dans le toker
+        const token = req.headers.authorization.split(' ')[1];//récupérer le token, on le split, divise la chaine de caract dasn un tableau autour de l'esapce qui se trouve entre bearer et le token, et on recup le token qui est en en deuxieme
+        const decodedToken = jwt.verify(token, process.env.CAMILLEBEST4EVER); // appel a la method verify de jwt, on lui passe le token et la clé, cela vérifie la validité dun token
+        const userId = decodedToken.userId; //recuperation de l'userId et le decoder dans le token pour la recup
         req.auth = {
-            userId: userId   // request 
+            userId: userId   // on rajoute a l'objet req qui lui est transmit au route appelées par la suite
         };
         next();
     } catch(error) {

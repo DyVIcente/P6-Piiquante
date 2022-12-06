@@ -13,6 +13,7 @@ const normalizePort = val => {
   }
   return false;
 };
+//si le serveur vous envoi un port a utiliser sinon port 3000
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
