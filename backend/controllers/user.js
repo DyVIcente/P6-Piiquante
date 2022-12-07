@@ -8,6 +8,10 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 //controllers a besoin de deux midleware
 
 //haché le mdp, puis avec le hash créé par bcrypt on va enregistrer le user dans la bdd
@@ -45,7 +49,7 @@ exports.login = (req, res, next) => {
                                 userId: user._id,
                                 token: jwt.sign(            // fct sign de jwt pour chiffrer un nouveau token
                                     { userId: user._id },  // création d'un token / le userId est la en payload(données encodées) pour ne pas que d'autres utilisateurs peuvent changer les sauces
-                                    'RANDOM_TOKEN_SECRET', // chaine qui sert de clé au cryptage 
+                                    process.env.CAMILLEBEST4EVER, // chaine qui sert de clé au cryptage 
                                     { expiresIn: '24h' }    // durée valide du token de 24h
                                 )
                             });

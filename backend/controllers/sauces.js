@@ -62,7 +62,7 @@ exports.deleteSauce = (req, res, next) => {
            if (sauce.userId != req.auth.userId) {
                res.status(401).json({message: 'Not authorized'});
            } else {
-               const filename = sauce.imageUrl.split('/images/')[1];
+               const filename = sauce.imageUrl.split('/images/')[1]; // unlink de fs permet de supprimer un fichier du systemù de fichiers
                fs.unlink(`images/${filename}`, () => {
 
                    Sauce.deleteOne({_id: req.params.id})
