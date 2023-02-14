@@ -2,6 +2,8 @@
 
 
 <p align="center">➡️ Projet 6 - Construisez une API sécurisée pour une application d'avis gastronomiques</p>
+<p align="center"><img src="https://user-images.githubusercontent.com/95346160/218705913-5cd57d1a-34ef-4c01-8cc6-1ee2265ba6c7.png" alt="image_piiquante" /></p>
+
 
 ## ✔️ Le contexte:
 -Piiquante se dédie à la création de sauces épicées dont les recettes sont gardées
@@ -32,6 +34,8 @@ de données.</br>
 -Les versions les plus récentes des logiciels sont utilisées avec des correctifs
 de sécurité actualisés.</br>
 -Le contenu du dossier images ne doit pas être téléchargé sur GitHub.</br>
+
+
 
 
 
